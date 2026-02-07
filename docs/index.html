@@ -50,8 +50,8 @@
     Ecu_KeyProvisioning --> Ecu_Stop
 
     state "Not reached (baseline)" as NOT_REACHED {
-        state Ecu_authentication
-        state Ecu_Verification
+        Ecu_authentication
+        Ecu_Verification
     }
 
     style Start fill:#C6E0B4
@@ -77,10 +77,10 @@
     ErrorHandler --> Ecu_Stop
 
     state "Not reached (baseline)" as NOT_REACHED {
-        state Ecu_SecChannel
-        state Ecu_KeyWriting
-        state Ecu_Verification
-        state Ecu_KeyProvisioning
+        Ecu_SecChannel
+        Ecu_KeyWriting
+        Ecu_Verification
+        Ecu_KeyProvisioning
     }
 
     style Start fill:#C6E0B4
@@ -110,8 +110,8 @@
     ErrorHandler --> Ecu_Stop
 
     state "Not reached (baseline)" as NOT_REACHED {
-        state Ecu_Verification
-        state Ecu_KeyProvisioning
+        Ecu_Verification
+        Ecu_KeyProvisioning
     }
 
     style Start fill:#C6E0B4
