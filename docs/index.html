@@ -36,7 +36,6 @@
     style Ecu_Verification fill:#DDEBF7
     style Ecu_KeyProvisioning fill:#F8CBAD
     style Ecu_Stop fill:#E4DFEC
-    style ErrorHandler fill:#FF0000,color:#FFFFFF</div>
   </div>
 
   
@@ -50,8 +49,8 @@
     Ecu_KeyProvisioning --> Ecu_Stop
 
     state "Not reached (baseline)" as NOT_REACHED {
-        Ecu_authentication
-        Ecu_Verification
+        state Ecu_authentication
+        state Ecu_Verification
     }
 
     style Start fill:#C6E0B4
@@ -62,7 +61,6 @@
     style Ecu_Verification fill:#DDEBF7
     style Ecu_KeyProvisioning fill:#F8CBAD
     style Ecu_Stop fill:#E4DFEC
-    style ErrorHandler fill:#FF0000,color:#FFFFFF
     style Ecu_authentication fill:#D9D9D9,color:#000000
     style Ecu_Verification fill:#D9D9D9,color:#000000</div>
     </div>
@@ -77,10 +75,10 @@
     ErrorHandler --> Ecu_Stop
 
     state "Not reached (baseline)" as NOT_REACHED {
-        Ecu_SecChannel
-        Ecu_KeyWriting
-        Ecu_Verification
-        Ecu_KeyProvisioning
+        state Ecu_SecChannel
+        state Ecu_KeyWriting
+        state Ecu_Verification
+        state Ecu_KeyProvisioning
     }
 
     style Start fill:#C6E0B4
@@ -91,7 +89,6 @@
     style Ecu_Verification fill:#DDEBF7
     style Ecu_KeyProvisioning fill:#F8CBAD
     style Ecu_Stop fill:#E4DFEC
-    style ErrorHandler fill:#FF0000,color:#FFFFFF
     style Ecu_SecChannel fill:#D9D9D9,color:#000000
     style Ecu_KeyWriting fill:#D9D9D9,color:#000000
     style Ecu_Verification fill:#D9D9D9,color:#000000
@@ -110,8 +107,8 @@
     ErrorHandler --> Ecu_Stop
 
     state "Not reached (baseline)" as NOT_REACHED {
-        Ecu_Verification
-        Ecu_KeyProvisioning
+        state Ecu_Verification
+        state Ecu_KeyProvisioning
     }
 
     style Start fill:#C6E0B4
@@ -122,7 +119,6 @@
     style Ecu_Verification fill:#DDEBF7
     style Ecu_KeyProvisioning fill:#F8CBAD
     style Ecu_Stop fill:#E4DFEC
-    style ErrorHandler fill:#FF0000,color:#FFFFFF
     style Ecu_Verification fill:#D9D9D9,color:#000000
     style Ecu_KeyProvisioning fill:#D9D9D9,color:#000000</div>
     </div>
@@ -132,10 +128,15 @@
 <script>
   window.addEventListener('DOMContentLoaded', async () => {
     try {
-      mermaid.initialize({ startOnLoad: false });
+      mermaid.initialize({ startOnLoad: false, securityLevel: 'loose' });
       await mermaid.run({ querySelector: '.mermaid' });
     } catch (e) {
       console.error('Mermaid render error:', e);
+      document.body.insertAdjacentHTML('afterbegin',
+        '<pre style="background:#fee;padding:12px;border-radius:8px;white-space:pre-wrap;">' +
+        'Mermaid render error:\n' + String(e) +
+        '</pre>'
+      );
     }
   });
 </script>
