@@ -1,0 +1,18 @@
+=<!doctype html>
+...
+<script src="https://cdn.jsdelivr.net/npm/mermaid@10/dist/mermaid.min.js"></script>
+<script>
+  window.addEventListener('DOMContentLoaded', async () => {
+    try {
+      mermaid.initialize({ startOnLoad: false, securityLevel: 'loose' });
+      await mermaid.run({ querySelector: '.mermaid' });
+    } catch (e) {
+      console.error('Mermaid render error:', e);
+      const pre = document.createElement('pre');
+      pre.style.cssText = 'background:#fee;padding:12px;border-radius:10px;white-space:pre-wrap;';
+      pre.textContent = 'Mermaid render error:\n' + String(e);
+      document.body.insertAdjacentElement('afterbegin', pre);
+    }
+  });
+</script>
+
