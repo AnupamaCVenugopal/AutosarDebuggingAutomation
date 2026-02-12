@@ -27,10 +27,6 @@ stateDiagram-v2
   Ecu_KeyWriting --> Ecu_KeyProvisioning
   Ecu_KeyProvisioning --> Ecu_Stop
 
-  %% Baseline states not reached in this scenario (declare them correctly)
-  state "Ecu_Verification" as Ecu_Verification
-  state "Ecu_authentication" as Ecu_authentication
-
   style Start fill:#C6E0B4
   style Ecu_init fill:#BDD7EE
   style Ecu_SecChannel fill:#FCE4D6
