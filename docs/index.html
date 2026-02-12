@@ -21,30 +21,64 @@
   <div class="card">
 <div class="mermaid">
 stateDiagram-v2
-  Start --> Ecu_init
-  Ecu_init --> Ecu_authentication
-  Ecu_authentication --> Ecu_SecChannel
-  Ecu_SecChannel --> Ecu_KeyWriting
-  Ecu_KeyWriting --> Ecu_Verification
-  Ecu_Verification --> Ecu_KeyProvisioning
-  Ecu_KeyProvisioning --> Ecu_Stop
+    Start --> Ecu_init
+    Ecu_init --> Ecu_SecChannel
+    Ecu_SecChannel --> Ecu_KeyWriting
+    Ecu_KeyWriting --> Ecu_KeyProvisioning
+    Ecu_KeyProvisioning --> Ecu_Stop
+
+    %% Baseline states not reached in this scenario
+    state Ecu_Verification
+    state Ecu_authentication
+
+    style Start fill:#C6E0B4
+    style Ecu_init fill:#BDD7EE
+    style Ecu_authentication fill:#FFF2CC
+    style Ecu_SecChannel fill:#FCE4D6
+    style Ecu_KeyWriting fill:#E2EFDA
+    style Ecu_Verification fill:#DDEBF7
+    style Ecu_KeyProvisioning fill:#F8CBAD
+    style Ecu_Stop fill:#E4DFEC
+    style ErrorHandler fill:#FF0000,color:#FFFFFF
+    style Ecu_authentication fill:#D9D9D9,color:#000000
+    style Ecu_Verification fill:#D9D9D9,color:#000000
 </div>
   </div>
 
   <div id="err"></div>
 
-  <script src="https://cdn.jsdelivr.net/npm/mermaid@10/dist/mermaid.min.js"></script>
-  <script>
-    window.addEventListener('DOMContentLoaded', async () => {
+<script src="https://cdn.jsdelivr.net/npm/mermaid@10/dist/mermaid.min.js"></script>
+<script>
+  window.addEventListener('DOMContentLoaded', async () => {
+    mermaid.initialize({ startOnLoad: false, securityLevel: 'loose' });
+
+    const blocks = Array.from(document.querySelectorAll('.mermaid'));
+
+    for (let i = 0; i < blocks.length; i++) {
+      // normalize text
+      const src = (blocks[i].textContent || '')
+        .replace(/\r\n/g, '\n')
+        .replace(/\r/g, '\n')
+        .trim();
+
+      blocks[i].textContent = src;
+
       try {
-        mermaid.initialize({ startOnLoad: false, securityLevel: 'loose' });
-        await mermaid.run({ querySelector: '.mermaid' });
+        mermaid.parse(src);
       } catch (e) {
-        console.error('Mermaid render error:', e);
-        document.getElementById('err').innerHTML =
-          '<pre class="err">Mermaid render error:\\n' + String(e) + '</pre>';
+        const pre = document.createElement('pre');
+        pre.style.cssText =
+          'background:#fee;padding:12px;border-radius:10px;white-space:pre-wrap;border:1px solid #f4b4b4;';
+        pre.textContent =
+          `Mermaid parse error in block ${i + 1}:\n\n` + (e?.message || String(e)) +
+          `\n\n---\nBlock text:\n` + src;
+        document.body.insertAdjacentElement('afterbegin', pre);
+        return; // stop at first failure
       }
-    });
-  </script>
+    }
+
+    await mermaid.run({ querySelector: '.mermaid' });
+  });
+</script>
 </body>
 </html>
