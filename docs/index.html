@@ -43,37 +43,17 @@ stateDiagram-v2
   <div id="err"></div>
 
 <script src="https://cdn.jsdelivr.net/npm/mermaid@10/dist/mermaid.min.js"></script>
-<script>
-  window.addEventListener('DOMContentLoaded', async () => {
-    mermaid.initialize({ startOnLoad: false, securityLevel: 'loose' });
-
-    const blocks = Array.from(document.querySelectorAll('.mermaid'));
-
-    for (let i = 0; i < blocks.length; i++) {
-      // normalize text
-      const src = (blocks[i].textContent || '')
-        .replace(/\r\n/g, '\n')
-        .replace(/\r/g, '\n')
-        .trim();
-
-      blocks[i].textContent = src;
-
+  <script>
+    window.addEventListener('DOMContentLoaded', async () => {
       try {
-        mermaid.parse(src);
+        mermaid.initialize({ startOnLoad: false, securityLevel: 'loose' });
+        await mermaid.run({ querySelector: '.mermaid' });
       } catch (e) {
-        const pre = document.createElement('pre');
-        pre.style.cssText =
-          'background:#fee;padding:12px;border-radius:10px;white-space:pre-wrap;border:1px solid #f4b4b4;';
-        pre.textContent =
-          `Mermaid parse error in block ${i + 1}:\n\n` + (e?.message || String(e)) +
-          `\n\n---\nBlock text:\n` + src;
-        document.body.insertAdjacentElement('afterbegin', pre);
-        return; // stop at first failure
+        console.error('Mermaid render error:', e);
+        document.getElementById('err').innerHTML =
+          '<pre class="err">Mermaid render error:\\n' + String(e) + '</pre>';
       }
-    }
-
-    await mermaid.run({ querySelector: '.mermaid' });
-  });
-</script>
+    });
+  </script>
 </body>
 </html>
