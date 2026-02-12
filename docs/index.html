@@ -19,12 +19,16 @@
   <div class="muted">If this renders a diagram, Mermaid is working on GitHub Pages.</div>
 
   <div class="card">
-    <div class="mermaid">
+<div class="mermaid">
 stateDiagram-v2
-  [*] --> A
-  A --> B
-  B --> C
-    </div>
+  Start --> Ecu_init
+  Ecu_init --> Ecu_authentication
+  Ecu_authentication --> Ecu_SecChannel
+  Ecu_SecChannel --> Ecu_KeyWriting
+  Ecu_KeyWriting --> Ecu_Verification
+  Ecu_Verification --> Ecu_KeyProvisioning
+  Ecu_KeyProvisioning --> Ecu_Stop
+</div>
   </div>
 
   <div id="err"></div>
