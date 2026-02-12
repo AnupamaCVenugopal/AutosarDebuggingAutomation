@@ -26,11 +26,6 @@ stateDiagram-v2
     Ecu_SecChannel --> Ecu_KeyWriting
     Ecu_KeyWriting --> Ecu_KeyProvisioning
     Ecu_KeyProvisioning --> Ecu_Stop
-
-    %% Baseline states not reached in this scenario
-    state Ecu_Verification
-    state Ecu_authentication
-
     style Start fill:#C6E0B4
     style Ecu_init fill:#BDD7EE
     style Ecu_authentication fill:#FFF2CC
