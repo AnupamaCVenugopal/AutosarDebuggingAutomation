@@ -3,53 +3,45 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Mermaid Test</title>
-
+  <title>Mermaid Forced Color Test</title>
   <style>
     body { font-family: system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif; margin: 24px; }
-    .card { border: 1px solid #eee; border-radius: 12px; padding: 16px; margin-top: 16px; }
-    .muted { color: #666; font-size: 13px; margin-bottom: 10px; }
     .mermaid { background: #fafafa; padding: 12px; border-radius: 10px; overflow-x: auto; }
-    pre.err { background:#fee; padding:12px; border-radius:10px; white-space:pre-wrap; border:1px solid #f4b4b4; }
+
+    /* 🔥 FORCE FILLS (override any theme/global CSS) */
+    svg .node rect,
+    svg .node polygon,
+    svg .node path {
+      fill-opacity: 1 !important;
+      stroke-opacity: 1 !important;
+    }
   </style>
 </head>
-
 <body>
-  <h1>✅ Mermaid Minimal Test</h1>
-  <div class="muted">If this renders a diagram, Mermaid is working on GitHub Pages.</div>
+  <h1>COLOR TEST — VERSION 888</h1>
 
-  <div class="card">
-<div class="mermaid">
-stateDiagram-v2
-  Start --> Ecu_init
-  Ecu_init --> Ecu_SecChannel
-  Ecu_SecChannel --> Ecu_KeyWriting
-  Ecu_KeyWriting --> Ecu_KeyProvisioning
-  Ecu_KeyProvisioning --> Ecu_Stop
+  <div class="mermaid">
+flowchart TD
+  A[A] --> B[B] --> C[C]
 
-  %% styles
-  Start fill:#C6E0B4
-  Ecu_init fill:#BDD7EE
-  Ecu_SecChannel fill:#FCE4D6
-  Ecu_KeyWriting fill:#E2EFDA
-  Ecu_KeyProvisioning fill:#F8CBAD
-  Ecu_Stop fill:#E4DFEC
-</div>
+  classDef red fill:#ff0000,stroke:#111,color:#fff !important;
+  classDef green fill:#00ff00,stroke:#111,color:#000 !important;
+  classDef blue fill:#0000ff,stroke:#111,color:#fff !important;
+
+  class A red;
+  class B green;
+  class C blue;
   </div>
 
-  <div id="err"></div>
-
-<script src="https://cdn.jsdelivr.net/npm/mermaid@10/dist/mermaid.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/mermaid@10/dist/mermaid.min.js"></script>
   <script>
     window.addEventListener('DOMContentLoaded', async () => {
-      try {
-        mermaid.initialize({ startOnLoad: false, securityLevel: 'loose' });
-        await mermaid.run({ querySelector: '.mermaid' });
-      } catch (e) {
-        console.error('Mermaid render error:', e);
-        document.getElementById('err').innerHTML =
-          '<pre class="err">Mermaid render error:\\n' + String(e) + '</pre>';
-      }
+      mermaid.initialize({
+        startOnLoad: false,
+        securityLevel: 'loose',
+        theme: 'base'
+      });
+      await mermaid.run({ querySelector: '.mermaid' });
     });
   </script>
 </body>
