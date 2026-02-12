@@ -1,0 +1,51 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Mermaid Test</title>
+
+  <style>
+    body { font-family: system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif; margin: 24px; }
+    .card { border: 1px solid #eee; border-radius: 12px; padding: 16px; margin-top: 16px; }
+    .muted { color: #666; font-size: 13px; margin-bottom: 10px; }
+    .mermaid { background: #fafafa; padding: 12px; border-radius: 10px; overflow-x: auto; }
+    pre.err { background:#fee; padding:12px; border-radius:10px; white-space:pre-wrap; border:1px solid #f4b4b4; }
+  </style>
+</head>
+
+<body>
+  <h1>✅ Mermaid Minimal Test</h1>
+  <div class="muted">If this renders a diagram, Mermaid is working on GitHub Pages.</div>
+
+  <div class="card">
+<div class="mermaid">
+flowchart TD
+  Start --> Ecu_init --> Ecu_SecChannel --> Ecu_KeyWriting --> Ecu_KeyProvisioning --> Ecu_Stop
+
+  style Start fill:#C6E0B4
+  style Ecu_init fill:#BDD7EE
+  style Ecu_SecChannel fill:#FCE4D6
+  style Ecu_KeyWriting fill:#E2EFDA
+  style Ecu_KeyProvisioning fill:#F8CBAD
+  style Ecu_Stop fill:#E4DFEC
+</div>
+  </div>
+
+  <div id="err"></div>
+
+<script src="https://cdn.jsdelivr.net/npm/mermaid@10/dist/mermaid.min.js"></script>
+  <script>
+    window.addEventListener('DOMContentLoaded', async () => {
+      try {
+        mermaid.initialize({ startOnLoad: false, securityLevel: 'loose' });
+        await mermaid.run({ querySelector: '.mermaid' });
+      } catch (e) {
+        console.error('Mermaid render error:', e);
+        document.getElementById('err').innerHTML =
+          '<pre class="err">Mermaid render error:\\n' + String(e) + '</pre>';
+      }
+    });
+  </script>
+</body>
+</html>
