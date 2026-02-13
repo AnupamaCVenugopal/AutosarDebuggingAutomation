@@ -1,0 +1,49 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Mermaid Color Test</title>
+  <style>
+    body { font-family: system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif; margin: 24px; }
+    .card { border: 1px solid #eee; border-radius: 12px; padding: 16px; margin-top: 16px; }
+    .mermaid { background: #fafafa; padding: 12px; border-radius: 10px; overflow-x: auto; }
+  </style>
+</head>
+<body>
+  <h1>✅ Mermaid Color Test</h1>
+
+  <div class="card">
+    <div class="mermaid">
+flowchart TD
+  Start[Start] --> Ecu_init[Ecu_init] --> Ecu_SecChannel[Ecu_SecChannel] --> Ecu_KeyWriting[Ecu_KeyWriting] --> Ecu_KeyProvisioning[Ecu_KeyProvisioning] --> Ecu_Stop[Ecu_Stop]
+
+  classDef green fill:#C6E0B4,stroke:#2d2d2d,color:#000;
+  classDef blue  fill:#BDD7EE,stroke:#2d2d2d,color:#000;
+  classDef peach fill:#FCE4D6,stroke:#2d2d2d,color:#000;
+  classDef mint  fill:#E2EFDA,stroke:#2d2d2d,color:#000;
+  classDef sand  fill:#F8CBAD,stroke:#2d2d2d,color:#000;
+  classDef lilac fill:#E4DFEC,stroke:#2d2d2d,color:#000;
+
+  class Start green;
+  class Ecu_init blue;
+  class Ecu_SecChannel peach;
+  class Ecu_KeyWriting mint;
+  class Ecu_KeyProvisioning sand;
+  class Ecu_Stop lilac;
+    </div>
+  </div>
+
+  <script src="https://cdn.jsdelivr.net/npm/mermaid@10/dist/mermaid.min.js"></script>
+  <script>
+    window.addEventListener('DOMContentLoaded', async () => {
+      mermaid.initialize({
+        startOnLoad: false,
+        securityLevel: 'loose',
+        theme: 'base' // helps avoid theme overrides
+      });
+      await mermaid.run({ querySelector: '.mermaid' });
+    });
+  </script>
+</body>
+</html>

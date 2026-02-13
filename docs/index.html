@@ -3,27 +3,118 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Mermaid Color Test</title>
+  <title>AUTOSAR Daily Debug</title>
+
   <style>
-    body { font-family: system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif; margin: 24px; }
-    .card { border: 1px solid #eee; border-radius: 12px; padding: 16px; margin-top: 16px; }
-    .mermaid { background: #fafafa; padding: 12px; border-radius: 10px; overflow-x: auto; }
+    body {
+      font-family: system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif;
+      margin: 24px;
+      line-height: 1.35;
+    }
+    h1 { margin: 0 0 6px 0; }
+    .muted { color: #666; font-size: 13px; margin-bottom: 18px; }
+    .card {
+      border: 1px solid #eee;
+      border-radius: 12px;
+      padding: 16px;
+      margin: 14px 0;
+      background: #fff;
+    }
+    .mermaid {
+      background: #fafafa;
+      padding: 12px;
+      border-radius: 10px;
+      overflow-x: auto;
+    }
+    pre.err {
+      background: #fee;
+      padding: 12px;
+      border-radius: 10px;
+      white-space: pre-wrap;
+      border: 1px solid #f4b4b4;
+    }
   </style>
 </head>
+
 <body>
-  <h1>✅ Mermaid Color Test</h1>
+  <h1>AUTOSAR Daily Debug</h1>
+  <div class="muted">Customer: customerA • Date: 2026-02-12</div>
+
+  <div id="err"></div>
 
   <div class="card">
+    <h2>Baseline</h2>
     <div class="mermaid">
 flowchart TD
-  Start[Start] --> Ecu_init[Ecu_init] --> Ecu_SecChannel[Ecu_SecChannel] --> Ecu_KeyWriting[Ecu_KeyWriting] --> Ecu_KeyProvisioning[Ecu_KeyProvisioning] --> Ecu_Stop[Ecu_Stop]
+  Start[Start]
+  Ecu_init[Ecu_init]
+  Ecu_authentication[Ecu_authentication]
+  Ecu_SecChannel[Ecu_SecChannel]
+  Ecu_KeyWriting[Ecu_KeyWriting]
+  Ecu_Verification[Ecu_Verification]
+  Ecu_KeyProvisioning[Ecu_KeyProvisioning]
+  Ecu_Stop[Ecu_Stop]
+  Start --> Ecu_init
+  Ecu_init --> Ecu_authentication
+  Ecu_authentication --> Ecu_SecChannel
+  Ecu_SecChannel --> Ecu_KeyWriting
+  Ecu_KeyWriting --> Ecu_Verification
+  Ecu_Verification --> Ecu_KeyProvisioning
+  Ecu_KeyProvisioning --> Ecu_Stop
 
   classDef green fill:#C6E0B4,stroke:#2d2d2d,color:#000;
-  classDef blue  fill:#BDD7EE,stroke:#2d2d2d,color:#000;
+  classDef blue fill:#BDD7EE,stroke:#2d2d2d,color:#000;
+  classDef yellow fill:#FFF2CC,stroke:#2d2d2d,color:#000;
   classDef peach fill:#FCE4D6,stroke:#2d2d2d,color:#000;
-  classDef mint  fill:#E2EFDA,stroke:#2d2d2d,color:#000;
-  classDef sand  fill:#F8CBAD,stroke:#2d2d2d,color:#000;
+  classDef mint fill:#E2EFDA,stroke:#2d2d2d,color:#000;
+  classDef ltblue fill:#DDEBF7,stroke:#2d2d2d,color:#000;
+  classDef sand fill:#F8CBAD,stroke:#2d2d2d,color:#000;
   classDef lilac fill:#E4DFEC,stroke:#2d2d2d,color:#000;
+  classDef grey fill:#D9D9D9,stroke:#2d2d2d,color:#000;
+  classDef red fill:#FF0000,stroke:#2d2d2d,color:#fff;
+
+  class Start green;
+  class Ecu_init blue;
+  class Ecu_authentication yellow;
+  class Ecu_SecChannel peach;
+  class Ecu_KeyWriting mint;
+  class Ecu_Verification ltblue;
+  class Ecu_KeyProvisioning sand;
+  class Ecu_Stop lilac;
+    </div>
+  </div>
+
+  <div class="card">
+    <h2>scenario_error_log_customerA_instance1.mmd</h2>
+    <div class="mermaid">
+flowchart TD
+  Start[Start]
+  Ecu_init[Ecu_init]
+  Ecu_SecChannel[Ecu_SecChannel]
+  Ecu_KeyWriting[Ecu_KeyWriting]
+  Ecu_KeyProvisioning[Ecu_KeyProvisioning]
+  Ecu_Stop[Ecu_Stop]
+  Start --> Ecu_init
+  Ecu_init --> Ecu_SecChannel
+  Ecu_SecChannel --> Ecu_KeyWriting
+  Ecu_KeyWriting --> Ecu_KeyProvisioning
+  Ecu_KeyProvisioning --> Ecu_Stop
+
+  subgraph Unreached_baseline_states[Unreached baseline states]
+    Ecu_authentication[Ecu_authentication]
+    Ecu_Verification[Ecu_Verification]
+  end
+
+  classDef green fill:#C6E0B4,stroke:#2d2d2d,color:#000;
+  classDef blue fill:#BDD7EE,stroke:#2d2d2d,color:#000;
+  classDef yellow fill:#FFF2CC,stroke:#2d2d2d,color:#000;
+  classDef peach fill:#FCE4D6,stroke:#2d2d2d,color:#000;
+  classDef mint fill:#E2EFDA,stroke:#2d2d2d,color:#000;
+  classDef ltblue fill:#DDEBF7,stroke:#2d2d2d,color:#000;
+  classDef sand fill:#F8CBAD,stroke:#2d2d2d,color:#000;
+  classDef lilac fill:#E4DFEC,stroke:#2d2d2d,color:#000;
+  classDef grey fill:#D9D9D9,stroke:#2d2d2d,color:#000;
+  classDef red fill:#FF0000,stroke:#2d2d2d,color:#fff;
 
   class Start green;
   class Ecu_init blue;
@@ -31,6 +122,98 @@ flowchart TD
   class Ecu_KeyWriting mint;
   class Ecu_KeyProvisioning sand;
   class Ecu_Stop lilac;
+  class Ecu_authentication grey;
+  class Ecu_Verification grey;
+    </div>
+  </div>
+
+  <div class="card">
+    <h2>scenario_error_log_customerA_instance2.mmd</h2>
+    <div class="mermaid">
+flowchart TD
+  Start[Start]
+  Ecu_init[Ecu_init]
+  Ecu_authentication[Ecu_authentication]
+  ErrorHandler[ErrorHandler]
+  Ecu_Stop[Ecu_Stop]
+  Start --> Ecu_init
+  Ecu_init --> Ecu_authentication
+  Ecu_authentication --> ErrorHandler
+  ErrorHandler --> Ecu_Stop
+
+  subgraph Unreached_baseline_states[Unreached baseline states]
+    Ecu_KeyProvisioning[Ecu_KeyProvisioning]
+    Ecu_KeyWriting[Ecu_KeyWriting]
+    Ecu_SecChannel[Ecu_SecChannel]
+    Ecu_Verification[Ecu_Verification]
+  end
+
+  classDef green fill:#C6E0B4,stroke:#2d2d2d,color:#000;
+  classDef blue fill:#BDD7EE,stroke:#2d2d2d,color:#000;
+  classDef yellow fill:#FFF2CC,stroke:#2d2d2d,color:#000;
+  classDef peach fill:#FCE4D6,stroke:#2d2d2d,color:#000;
+  classDef mint fill:#E2EFDA,stroke:#2d2d2d,color:#000;
+  classDef ltblue fill:#DDEBF7,stroke:#2d2d2d,color:#000;
+  classDef sand fill:#F8CBAD,stroke:#2d2d2d,color:#000;
+  classDef lilac fill:#E4DFEC,stroke:#2d2d2d,color:#000;
+  classDef grey fill:#D9D9D9,stroke:#2d2d2d,color:#000;
+  classDef red fill:#FF0000,stroke:#2d2d2d,color:#fff;
+
+  class Start green;
+  class Ecu_init blue;
+  class Ecu_authentication yellow;
+  class ErrorHandler red;
+  class Ecu_Stop lilac;
+  class Ecu_KeyProvisioning grey;
+  class Ecu_KeyWriting grey;
+  class Ecu_SecChannel grey;
+  class Ecu_Verification grey;
+    </div>
+  </div>
+
+  <div class="card">
+    <h2>scenario_error_log_customerA_instance3.mmd</h2>
+    <div class="mermaid">
+flowchart TD
+  Start[Start]
+  Ecu_init[Ecu_init]
+  Ecu_authentication[Ecu_authentication]
+  Ecu_SecChannel[Ecu_SecChannel]
+  Ecu_KeyWriting[Ecu_KeyWriting]
+  ErrorHandler[ErrorHandler]
+  Ecu_Stop[Ecu_Stop]
+  Start --> Ecu_init
+  Ecu_init --> Ecu_authentication
+  Ecu_authentication --> Ecu_SecChannel
+  Ecu_SecChannel --> Ecu_KeyWriting
+  Ecu_KeyWriting --> ErrorHandler
+  ErrorHandler --> Ecu_Stop
+
+  subgraph Unreached_baseline_states[Unreached baseline states]
+    Ecu_KeyProvisioning[Ecu_KeyProvisioning]
+    Ecu_Verification[Ecu_Verification]
+  end
+
+  classDef green fill:#C6E0B4,stroke:#2d2d2d,color:#000;
+  classDef blue fill:#BDD7EE,stroke:#2d2d2d,color:#000;
+  classDef yellow fill:#FFF2CC,stroke:#2d2d2d,color:#000;
+  classDef peach fill:#FCE4D6,stroke:#2d2d2d,color:#000;
+  classDef mint fill:#E2EFDA,stroke:#2d2d2d,color:#000;
+  classDef ltblue fill:#DDEBF7,stroke:#2d2d2d,color:#000;
+  classDef sand fill:#F8CBAD,stroke:#2d2d2d,color:#000;
+  classDef lilac fill:#E4DFEC,stroke:#2d2d2d,color:#000;
+  classDef grey fill:#D9D9D9,stroke:#2d2d2d,color:#000;
+  classDef red fill:#FF0000,stroke:#2d2d2d,color:#fff;
+
+  class Start green;
+  class Ecu_init blue;
+  class Ecu_authentication yellow;
+  class Ecu_SecChannel peach;
+  class Ecu_KeyWriting mint;
+  class ErrorHandler red;
+  class Ecu_Stop lilac;
+  class Ecu_KeyProvisioning grey;
+  class Ecu_Verification grey;
     </div>
   </div>
 
@@ -40,9 +223,40 @@ flowchart TD
       mermaid.initialize({
         startOnLoad: false,
         securityLevel: 'loose',
-        theme: 'base' // helps avoid theme overrides
+        theme: 'base'
       });
-      await mermaid.run({ querySelector: '.mermaid' });
+
+      const blocks = Array.from(document.querySelectorAll('.mermaid'));
+      for (let i = 0; i < blocks.length; i++) {
+        const src = (blocks[i].textContent || '')
+          .replace(/\r\n/g, '\n')
+          .replace(/\r/g, '\n')
+          .trim();
+
+        blocks[i].textContent = src;
+
+        try {
+          await mermaid.parse(src); // async in Mermaid v10
+        } catch (e) {
+          const pre = document.createElement('pre');
+          pre.className = 'err';
+          pre.textContent =
+            `Mermaid parse error in block ${i + 1}:\n\n` +
+            (e?.message || String(e)) +
+            `\n\n---\nBlock text:\n` + src;
+          document.getElementById('err').appendChild(pre);
+          return; // stop on first error
+        }
+      }
+
+      try {
+        await mermaid.run({ querySelector: '.mermaid' });
+      } catch (e) {
+        const pre = document.createElement('pre');
+        pre.className = 'err';
+        pre.textContent = 'Mermaid render error:\n' + String(e);
+        document.getElementById('err').appendChild(pre);
+      }
     });
   </script>
 </body>
