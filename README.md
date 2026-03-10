@@ -6,6 +6,16 @@ This project automates first-pass debugging analysis by comparing failure scenar
 
 ---
 
+## Project Highlights
+
+- Automated baseline-vs-failure path comparison
+- AI-assisted first-pass RCA generation
+- Human-in-the-loop review workflow
+- Dashboard-backed debugging summaries
+- Designed for AUTOSAR customer error-log triage
+
+---
+
 ## Overview
 
 Debugging customer-reported AUTOSAR issues is often repetitive, manual, and time-consuming. Engineers typically need to inspect logs, compare expected vs. actual state transitions, identify where the execution path diverged, and then formulate possible causes and next diagnostic steps.
@@ -77,3 +87,13 @@ flowchart LR
     E --> F[Format Summary]
     F --> G[Human-in-the-Loop Review]
     F --> H[Dashboard / RCA Output]
+
+---
+
+## Future Improvements
+
+- Historical case retrieval using a RAG layer
+- Postgres-backed incident memory
+- Similar-ticket recommendations
+- Resolution learning from confirmed fixes
+
