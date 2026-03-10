@@ -1,16 +1,79 @@
 # AUTOSAR Debugging Automation
 
-An AI-assisted debugging workflow for AUTOSAR customer error logs.  
-The system ingests incoming failure artifacts, compares scenario paths against a known baseline, identifies the first deviation and last meaningful reached state, generates structured root-cause hypotheses with next-check recommendations, and produces dashboard-backed RCA summaries with human-in-the-loop review.
+An AI-assisted debugging workflow for AUTOSAR customer error logs and state-path deviations.
 
-## What it does
-- Parses customer error scenarios and baseline paths
-- Detects path deviations and ErrorHandler transitions
-- Extracts structured debugging signals such as first deviation, missing baseline states, and failure region
-- Uses an AI agent to generate likely causes, observations, and recommended next checks
-- Produces readable RCA summaries and dashboard links for developer review
-- Supports human approval before sending/debug handoff
+This project automates first-pass debugging analysis by comparing failure scenarios against a known baseline path, identifying the first deviation and last meaningful reached state, generating structured root-cause hypotheses, and producing dashboard-backed RCA summaries with human-in-the-loop review.
 
-## Current scope
-This version focuses on first-pass RCA automation for AUTOSAR state-path debugging.  
-A planned next enhancement is historical case retrieval (RAG) to compare new failures against similar previously analyzed incidents.
+---
+
+## Overview
+
+Debugging customer-reported AUTOSAR issues is often repetitive, manual, and time-consuming. Engineers typically need to inspect logs, compare expected vs. actual state transitions, identify where the execution path diverged, and then formulate possible causes and next diagnostic steps.
+
+This workflow reduces that manual effort by automating the early triage phase.
+
+The system:
+- ingests customer error scenarios
+- compares scenario paths against a baseline
+- detects deviations and ErrorHandler branches
+- extracts structured debugging signals
+- uses an AI agent to generate likely causes and next checks
+- formats the output into readable RCA summaries
+- supports human approval before further handoff
+
+---
+
+## Problem Statement
+
+In traditional customer-support and debugging flows, engineers often spend significant time on:
+- manually reviewing error logs
+- comparing baseline vs. failed execution paths
+- identifying the first point of divergence
+- summarizing findings for developers or stakeholders
+- repeating similar RCA steps across multiple tickets
+
+This creates delays in triage and makes debugging effort difficult to scale.
+
+---
+
+## Solution
+
+This project implements an AI-assisted AUTOSAR debugging pipeline that automates first-pass root-cause analysis for scenario-path deviations.
+
+The workflow performs:
+1. **Baseline vs. scenario comparison**
+2. **Deviation detection**
+3. **ErrorHandler path identification**
+4. **AI-assisted RCA generation**
+5. **Structured summary formatting**
+6. **Human-in-the-loop review before final use**
+
+The result is a traceable and reviewable debugging summary that helps engineers triage issues faster and more consistently.
+
+---
+
+## Key Capabilities
+
+- Baseline vs. failure-path comparison
+- First-deviation detection
+- Last meaningful reached-state extraction
+- ErrorHandler path identification
+- Structured RCA hypothesis generation
+- Suggested next debugging checks
+- Dashboard-backed summaries
+- Human-in-the-loop review
+- GitHub Pages-based visualization output
+
+---
+
+## Workflow Architecture
+
+```mermaid
+flowchart LR
+    A[Customer Error Log / Scenario File] --> B[Compute Deviations]
+    B --> C[Baseline vs Scenario Comparison]
+    C --> D[AI RCA Agent]
+    D --> E[Parse Structured JSON]
+    E --> F[Format Summary]
+    F --> G[Human-in-the-Loop Review]
+    F --> H[Dashboard / RCA Output]
