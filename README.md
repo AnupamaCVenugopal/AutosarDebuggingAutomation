@@ -88,11 +88,9 @@ flowchart LR
     F --> G[Human-in-the-Loop Approval]
     F --> H[Dashboard Output]
 
-
+```markdown
 ## Future Improvements
-
 - Historical case retrieval using a RAG layer
 - Postgres-backed incident memory
 - Similar-ticket recommendations
 - Resolution learning from confirmed fixes
-
