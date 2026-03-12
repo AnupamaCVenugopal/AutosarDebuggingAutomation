@@ -76,7 +76,6 @@ The result is a traceable and reviewable debugging summary that helps engineers 
 
 ---
 
-```markdown
 ## Workflow Architecture
 
 ```mermaid
@@ -88,6 +87,7 @@ flowchart LR
     E --> F[Format RCA Summary]
     F --> G[Human-in-the-Loop Approval]
     F --> H[Dashboard Output]
+
 
 ## Future Improvements
 
