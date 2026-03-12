@@ -88,7 +88,6 @@ flowchart LR
     E --> F[Format RCA Summary]
     F --> G[Human-in-the-Loop Approval]
     F --> H[Dashboard Output]
----
 
 ## Future Improvements
 
