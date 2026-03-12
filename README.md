@@ -76,18 +76,18 @@ The result is a traceable and reviewable debugging summary that helps engineers 
 
 ---
 
+```markdown
 ## Workflow Architecture
 
 ```mermaid
 flowchart LR
-    A[Customer Error Log / Scenario File] --> B[Compute Deviations]
-    B --> C[Baseline vs Scenario Comparison]
-    C --> D[AI RCA Agent]
+    A[Customer Error Logs / Scenario Files] --> B[Compute Deviations]
+    B --> C[Extract Structured Debug Signals]
+    C --> D[AI-Assisted RCA Agent]
     D --> E[Parse Structured JSON]
-    E --> F[Format Summary]
-    F --> G[Human-in-the-Loop Review]
-    F --> H[Dashboard / RCA Output]
-
+    E --> F[Format RCA Summary]
+    F --> G[Human-in-the-Loop Approval]
+    F --> H[Dashboard Output]
 ---
 
 ## Future Improvements
