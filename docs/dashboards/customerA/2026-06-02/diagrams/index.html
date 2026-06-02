@@ -63,26 +63,24 @@ flowchart TD
   </div>
 
   <div class="card">
-    <h2>scenario_error_log_customerA_instance3.mmd</h2>
+    <h2>scenario_error_log_customerA_instance1.mmd</h2>
     <div class="mermaid">
 flowchart TD
   Start[Start]
   Ecu_init[Ecu_init]
-  Ecu_authentication[Ecu_authentication]
   Ecu_SecChannel[Ecu_SecChannel]
   Ecu_KeyWriting[Ecu_KeyWriting]
-  ErrorHandler[ErrorHandler]
+  Ecu_KeyProvisioning[Ecu_KeyProvisioning]
   Ecu_Stop[Ecu_Stop]
   Start --> Ecu_init
-  Ecu_init --> Ecu_authentication
-  Ecu_authentication --> Ecu_SecChannel
+  Ecu_init --> Ecu_SecChannel
   Ecu_SecChannel --> Ecu_KeyWriting
-  Ecu_KeyWriting --> ErrorHandler
-  ErrorHandler --> Ecu_Stop
+  Ecu_KeyWriting --> Ecu_KeyProvisioning
+  Ecu_KeyProvisioning --> Ecu_Stop
 
   subgraph Unreached_baseline_states[Unreached baseline states]
+    Ecu_authentication[Ecu_authentication]
     Ecu_Verification[Ecu_Verification]
-    Ecu_KeyProvisioning[Ecu_KeyProvisioning]
   end
 
   classDef grey fill:#D9D9D9,stroke:#2d2d2d,color:#000;
@@ -98,13 +96,12 @@ flowchart TD
 
   class Start c_Start;
   class Ecu_init c_Ecu_init;
-  class Ecu_authentication c_Ecu_authentication;
   class Ecu_SecChannel c_Ecu_SecChannel;
   class Ecu_KeyWriting c_Ecu_KeyWriting;
-  class ErrorHandler red;
+  class Ecu_KeyProvisioning c_Ecu_KeyProvisioning;
   class Ecu_Stop c_Ecu_Stop;
+  class Ecu_authentication grey;
   class Ecu_Verification grey;
-  class Ecu_KeyProvisioning grey;
     </div>
   </div>
 
@@ -153,24 +150,26 @@ flowchart TD
   </div>
 
   <div class="card">
-    <h2>scenario_error_log_customerA_instance1.mmd</h2>
+    <h2>scenario_error_log_customerA_instance3.mmd</h2>
     <div class="mermaid">
 flowchart TD
   Start[Start]
   Ecu_init[Ecu_init]
+  Ecu_authentication[Ecu_authentication]
   Ecu_SecChannel[Ecu_SecChannel]
   Ecu_KeyWriting[Ecu_KeyWriting]
-  Ecu_KeyProvisioning[Ecu_KeyProvisioning]
+  ErrorHandler[ErrorHandler]
   Ecu_Stop[Ecu_Stop]
   Start --> Ecu_init
-  Ecu_init --> Ecu_SecChannel
+  Ecu_init --> Ecu_authentication
+  Ecu_authentication --> Ecu_SecChannel
   Ecu_SecChannel --> Ecu_KeyWriting
-  Ecu_KeyWriting --> Ecu_KeyProvisioning
-  Ecu_KeyProvisioning --> Ecu_Stop
+  Ecu_KeyWriting --> ErrorHandler
+  ErrorHandler --> Ecu_Stop
 
   subgraph Unreached_baseline_states[Unreached baseline states]
-    Ecu_authentication[Ecu_authentication]
     Ecu_Verification[Ecu_Verification]
+    Ecu_KeyProvisioning[Ecu_KeyProvisioning]
   end
 
   classDef grey fill:#D9D9D9,stroke:#2d2d2d,color:#000;
@@ -186,12 +185,13 @@ flowchart TD
 
   class Start c_Start;
   class Ecu_init c_Ecu_init;
+  class Ecu_authentication c_Ecu_authentication;
   class Ecu_SecChannel c_Ecu_SecChannel;
   class Ecu_KeyWriting c_Ecu_KeyWriting;
-  class Ecu_KeyProvisioning c_Ecu_KeyProvisioning;
+  class ErrorHandler red;
   class Ecu_Stop c_Ecu_Stop;
-  class Ecu_authentication grey;
   class Ecu_Verification grey;
+  class Ecu_KeyProvisioning grey;
     </div>
   </div>
 
